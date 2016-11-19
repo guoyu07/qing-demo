@@ -5,9 +5,9 @@ class QingPage extends QingComponent
   @property 'layout'
 
   _init: ->
-    console.log @layout
+    # to be implemented
 
-  _destory: ->
-    console.log 'destroyed'
+  _destroy: ->
+    # to be implemented
 
 window.QingPage = QingPage

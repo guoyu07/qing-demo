@@ -54,7 +54,7 @@ let Deferred;
   if (_customElements()) {
     _customElements().flush = function() {};
     if (!_customElements().forcePolyfill) {
-      runNativeShim();
+      nativeShim();
       return;
     }
   }
@@ -386,7 +386,7 @@ let Deferred;
      * @private
      */
     _observeRoot(root) {
-      //console.log('_observeRoot', root, root.baseURI);
+      // console.log('_observeRoot', root, root.baseURI);
       // console.assert(!root[_observerProp]);
       if (root[_observerProp] != null) {
         //console.warn(`Root ${root} is already observed`);
@@ -430,8 +430,8 @@ let Deferred;
           // so might diverge from spec reaction ordering
           const addedNodes = /** @type {!NodeList<!Node>} */(mutation.addedNodes);
           const removedNodes = /** @type {!NodeList<!Node>} */(mutation.removedNodes);
-          this._addNodes(addedNodes);
           this._removeNodes(removedNodes);
+          this._addNodes(addedNodes);
         }
       }
     }
@@ -705,7 +705,9 @@ let Deferred;
     if (definition) {
       customElements._upgradeElement(element, definition, callConstructor);
     }
-    customElements._observeRoot(element);
+    if (tagName.toLowerCase() !== 'html') {
+      customElements._observeRoot(element);
+    }
     return element;
   };
   doc.createElement = function(tagName, options) {

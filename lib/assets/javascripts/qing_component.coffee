@@ -42,7 +42,13 @@ QingComponentBasedOn = (superClass = 'HTMLElement') ->
     @property: (name, observed) ->
       attrName = _.kebabCase(name)
       @get name, -> @getAttribute attrName
-      @set name, (val) -> @setAttribute attrName, val
+      @set name, (val) ->
+        if val == true
+          @setAttribute attrName, ''
+        else if val == false
+          @setAttribute attrName, val
+        else
+          @removeAttribute attrName
       @observedAttributes.push(attrName) if observed
 
     @observedAttributes: []
@@ -51,7 +57,7 @@ QingComponentBasedOn = (superClass = 'HTMLElement') ->
       @_init()
 
     disconnectedCallback: ->
-      @_destory()
+      @_destroy()
 
     attributeChangedCallback: (attrName, oldValue, newValue) ->
       @["#{_.camelCase attrName}Changed"]?(newValue, oldValue)
