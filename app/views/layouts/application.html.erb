@@ -9,6 +9,8 @@
   </head>
 
   <body>
-    <%= yield %>
+    <<%= page_name %>-page layout="default">
+      <%= yield %>
+    </<%= page_name %>-page>
   </body>
 </html>

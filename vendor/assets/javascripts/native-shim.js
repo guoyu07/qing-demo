@@ -58,7 +58,8 @@
  *  Compiling valid class-based custom elements to ES5 will satisfy these
  *  requirements with the latest version of popular transpilers.
  */
-(() => {
+
+window.runNativeShim = function() {
   'use strict';
 
   const NativeHTMLElement = window.HTMLElement;
@@ -146,4 +147,4 @@
 
   window.customElements.get = (tagname) => constructorByTagname.get(tagname);
 
-})();
+};

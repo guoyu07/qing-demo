@@ -1,3 +1,5 @@
+//= require native-shim
+
 /**
  * @license
  * Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
@@ -36,7 +38,7 @@ let Deferred;
 
   const doc = document;
   const win = window;
-  
+
   /**
    * Gets 'customElement' from window so that it could be modified after
    * the polyfill loads.
@@ -52,6 +54,7 @@ let Deferred;
   if (_customElements()) {
     _customElements().flush = function() {};
     if (!_customElements().forcePolyfill) {
+      runNativeShim();
       return;
     }
   }

@@ -36,21 +36,21 @@ QingComponentBasedOn = (superClass = 'HTMLElement') ->
 
     @set: (propertyName, setMethod) ->
       Object.defineProperty @prototype, propertyName,
-        set: getMethod
+        set: setMethod
         configurable: true
 
     @property: (name, observed) ->
       attrName = _.kebabCase(name)
       @get name, -> @getAttribute attrName
       @set name, (val) -> @setAttribute attrName, val
-      @::observedAttributes.push(attrName) if observed
+      @observedAttributes.push(attrName) if observed
 
-    observedAttributes: []
+    @observedAttributes: []
 
     connectedCallback: ->
       @_init()
 
-    connectedCallback: ->
+    disconnectedCallback: ->
       @_destory()
 
     attributeChangedCallback: (attrName, oldValue, newValue) ->

@@ -1,4 +1,4 @@
-#= require qing-component
+#= require qing_component
 
 class QingPage extends QingComponent
 
@@ -9,3 +9,5 @@ class QingPage extends QingComponent
 
   _destory: ->
     console.log 'destroyed'
+
+window.QingPage = QingPage
